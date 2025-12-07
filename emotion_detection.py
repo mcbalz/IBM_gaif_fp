@@ -16,7 +16,7 @@ def emotion_detector(text_to_detect):
     myobj = { "raw_document": { "text": text_to_detect} }
     response = requests.post(url, json=myobj, headers=headers)
     data = json.loads(response.text)
-    emotions = data["emotionPredictions"]["emotions"]
+    emotions = data["emotionPredictions"][0]["emotion"]
     high_item = [None, 0]
     for item in emotions:
         if item[1] > high_item[1]:
