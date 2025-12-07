@@ -7,10 +7,16 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    """This returns the template/index.html file for the 
+    user interface."""
     return render_template('index.html')
 
 @app.route('/emotionDetector')
 def emotional():
+    """This function gets the textToAnalyze from the
+    JavaScript-enabled web-form in index.html and
+    runs it through the EmotionDetection function
+    utilizing WatsonAI."""
     text_to_analyze = request.args.get('textToAnalyze')
     result = emotion_detector(text_to_analyze)
 
