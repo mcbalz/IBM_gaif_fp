@@ -5,11 +5,11 @@ from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask(__name__)
 
-@app.route('/'):
+@app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/emotionDetector'):
+@app.route('/emotionDetector')
 def emotional():
     text_to_analyze = request.args.get('textToAnalyze')
     result = emotion_detector(text_to_analyze)
