@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 import requests
+import json
 
 '''In this file, we will write the function to run emotion detection.'''
 
@@ -14,12 +15,15 @@ def emotion_detector(text_to_detect):
             
     myobj = { "raw_document": { "text": text_to_detect} }
     response = requests.post(url, json=myobj, headers=headers)
-    # print(response.text)
-    # data = json.loads(response.text)
-    # final_result = {}
-    # final_result['score'] = data['documentSentiment']['score']
-    # final_result['label'] = data['documentSentiment']['label']
-    return response.text
+    data = json.loads(response.text)
+    emotions = data["emotionPredictions"]["emotions"]
+    high_item = [None, 0]
+    for item in emotions:
+        if item[1] > high_item[1]:
+            high_item[0], high_item[1] = item[0], item[1]
+    emotions["dominant_emotion"] = high_item[0]
+
+    return emotions
 
 # TO DO: take a screenshot of the code written and save it as 2a_emotion_detection.png
 
