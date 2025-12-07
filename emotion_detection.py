@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 
+import requests
+
 '''In this file, we will write the function to run emotion detection.'''
 
 # TO DO: write function emotion_detector
@@ -10,7 +12,7 @@ def emotion_detector(text_to_detect):
       "emotion_aggregated-workflow_lang_en_stock"
     }
             
-    myobj = { "raw_document": { "text": text_for_analysis} }
+    myobj = { "raw_document": { "text": text_to_detect} }
     response = requests.post(url, json=myobj, headers=headers)
     # print(response.text)
     # data = json.loads(response.text)
